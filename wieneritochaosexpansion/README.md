@@ -12,5 +12,5 @@ This implementation is applicable to the following two-dimensional SDE, but can 
     \mathrm{d}<S, v>_t = \rho\mathrm{d}t \\
 
 
-* Bibliography
+## Bibliography
 [1]Funahashi, H. (2014). A chaos expansion approach under hybrid volatility models. Quantitative Finance, 14(11), 1923-1936.
