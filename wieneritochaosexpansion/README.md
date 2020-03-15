@@ -1,7 +1,7 @@
 # Wiener-Ito Chaos Expansion
 ## Implementing Wiener-Ito Chaos Expansion using python
 There are mainly two types of asymptotic expansion methods for SDE solutions in finance.
-One is small diffusion theory, and the ohter is Wiener-Ito Chaos(WIC) expansion.
+One is small diffusion theory, and the other is Wiener-Ito Chaos(WIC) expansion.
 Asymptotic expansion using small diffusion theory is implemented in yuima package in R.
 But there is no asymptotic implementation using WIC, so here is what I implemented using python.
 
