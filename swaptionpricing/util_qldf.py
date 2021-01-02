@@ -18,12 +18,22 @@ class util_qldf:
             self.dates_ql = [ql.DateParser.parse(i, 'yyyy/mm/dd') for i in self.dat_raw['DATE']]
         else:
             self.dates_ql = [ql.DateParser.parse(i, 'yyyy/mm/dd') for i in self.dat_raw.index]
-        self.df_ql = [i / self.dat_raw['DF'][0] for i in self.dat_raw['DF']]
-        self.create_yieldtermstructure()
+        self.discount_df = [i / self.dat_raw['discountDF'][0] for i in self.dat_raw['discountDF']]
+        self.forecast_df = [i / self.dat_raw['forecastDF'][0] for i in self.dat_raw['forecastDF']]
 
-    def create_yieldtermstructure(self, dc=ql.Actual365Fixed()):
-        self.yterm = ql.DiscountCurve(self.dates_ql, self.df_ql, dc)
-        self.yterm_handle = ql.YieldTermStructureHandle(self.yterm)
+        self.create_yieldtermstructure(True)
+        self.create_yieldtermstructure(False)
 
-    def get_yieldtermstructure_handle(self):
-        return self.yterm_handle
+    def create_yieldtermstructure(self, isDiscount=True, dc=ql.Actual365Fixed()):
+        if isDiscount:
+            self.yterm_discount = ql.DiscountCurve(self.dates_ql, self.discount_df, dc)
+            self.yterm_discount_handle = ql.YieldTermStructureHandle(self.yterm_discount)
+        else:
+            self.yterm_forecast = ql.DiscountCurve(self.dates_ql, self.forecast_df, dc)
+            self.yterm_forecast_handle = ql.YieldTermStructureHandle(self.yterm_forecast)
+
+    def get_discount_yieldtermstructure_handle(self):
+        return self.yterm_discount_handle
+
+    def get_forecast_yieldtermstructure_handle(self):
+        return self.yterm_forecast_handle
